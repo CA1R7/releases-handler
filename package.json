@@ -4,7 +4,9 @@
   "description": "A simple releases handler for destry app",
   "main": "./dist/index.js",
   "scripts": {
-    "start": "yarn build && node ./dist",
+    "heroku-prebuild": "yarn build",
+    "dev": "yarn build && yarn start",
+    "start": "node ./dist",
     "lint": "eslint src --ext .ts,.json",
     "lint:fix": "yarn lint --fix",
     "build": "tsc",
