@@ -4,12 +4,11 @@
   "description": "A simple releases handler for destry app",
   "main": "./dist/index.js",
   "scripts": {
-    "heroku-prebuild": "yarn",
-    "dev": "yarn build && yarn start",
+    "dev": "ts-node ./src",
     "start": "node ./dist",
     "lint": "eslint src --ext .ts,.json",
     "lint:fix": "yarn lint --fix",
-    "build": "tsc",
+    "build": "tsc -p tsconfig.json",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -33,8 +32,9 @@
     "cors": "^2.8.5",
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
-    "typescript": "^4.4.2",
-    "helmet": "^4.6.0"
+    "helmet": "^4.6.0",
+    "ts-node": "^10.2.1",
+    "typescript": "^4.4.2"
   },
   "devDependencies": {
     "@types/cors": "^2.8.12",
