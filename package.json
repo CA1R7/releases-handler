@@ -5,7 +5,8 @@
   "main": "./dist/index.js",
   "scripts": {
     "heroku-prebuild": "yarn",
-    "start": "yarn build && yarn start",
+    "dev": "yarn build && yarn start",
+    "start": "node ./dist",
     "lint": "eslint src --ext .ts,.json",
     "lint:fix": "yarn lint --fix",
     "build": "tsc",
