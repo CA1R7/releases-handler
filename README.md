@@ -1,5 +1,5 @@
 # Releases handler
-A simple releases handler build with expressjs
+A simple releases handler built with expressjs
 
 #### What about the releases ?
 On `common` folder there `updates.json` which contains a latest update details and `releases` folder contains releases binary files.
