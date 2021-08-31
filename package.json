@@ -1,25 +1,27 @@
 {
   "name": "releases-handler",
   "version": "1.0.0",
-  "description": "Releases-Handler for destry app",
+  "description": "A simple releases handler for destry app",
   "main": "./dist/index.js",
   "scripts": {
     "start": "yarn build && node ./dist",
     "lint": "eslint src --ext .ts,.json",
     "lint:fix": "yarn lint --fix",
-    "build": "tsc",
+    "build": "yarn lint && tsc",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/deestry/releases-handler.git"
+    "url": "git+https://github.com/destry/releases-handler.git"
   },
-  "keywords": [],
+  "keywords": [
+    "releases"
+  ],
   "author": "cairbyte71",
   "bugs": {
-    "url": "https://github.com/deestry/releases-handler/issues"
+    "url": "https://github.com/destry/releases-handler/issues"
   },
-  "homepage": "https://github.com/deestry/releases-handler#readme",
+  "homepage": "https://github.com/destry/releases-handler#readme",
   "dependencies": {
     "body-parser": "^1.19.0",
     "cors": "^2.8.5",
