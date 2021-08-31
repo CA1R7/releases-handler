@@ -11,7 +11,7 @@ on:
       - "src/**"
 
 jobs:
-  Api-Check:
+  Handler-Check:
     runs-on: ubuntu-latest
 
     strategy:
