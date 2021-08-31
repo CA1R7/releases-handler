@@ -1,13 +1,15 @@
 {
-  "lib": ["ES2015"],
-  "compilerOptions": {
-    "module": "commonjs",
-    "esModuleInterop": true,
-    "target": "es6",
-    "strict": true,
-    "sourceMap": false,
-    "outDir": "dist",
-    "declaration": false,
-    "resolveJsonModule": true
-  }
+  "compilerOptions": {              
+    "target": "es5",                          
+    "module": "commonjs",                     
+    "outDir": "./dist",                        
+    "isolatedModules": true,
+    "strict": true,                           
+    "moduleResolution": "node",            
+    "esModuleInterop": true,                  
+    "resolveJsonModule": true,
+    "skipLibCheck": true,                     
+    "forceConsistentCasingInFileNames": true  
+  },
+  "include": ["./src"]
 }
