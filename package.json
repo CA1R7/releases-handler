@@ -7,7 +7,7 @@
     "start": "yarn build && node ./dist",
     "lint": "eslint src --ext .ts,.json",
     "lint:fix": "yarn lint --fix",
-    "build": "yarn lint && tsc",
+    "build": "tsc",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
