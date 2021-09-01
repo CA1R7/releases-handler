@@ -18,7 +18,7 @@ export interface ParamsRequiredType {
 import { Router, Request, Response } from "express";
 import { check } from "../../utils/check";
 import { ResponseSt } from "../../utils/response";
-import updates from "../../../common/updates.json";
+import updates from "../../common/updates.json";
 
 const updates_manager: Router = Router();
 
@@ -32,35 +32,48 @@ type RequestTypeForUpdates = Request<
 >;
 
 updates_manager.get("/:version?/:platform?", (req: RequestTypeForUpdates, res: Response) => {
-  const version: string | null = req.params.version ?? null;
-  const plf: string | null = req.params.platform ?? null;
+  let version: string | null = req.params.version?.trim() ?? null;
+  const plf: string | null = req.params.platform?.trim() ?? null;
 
-  let release: UpdatesPropertys & { [key: string]: any }; // eslint-disable-line
-
+  let releaseObject: any; // eslint-disable-line
   try {
+    const latestKey = "latest";
     // the version is important for get release
-    if (!version || check<UpdatesPropertys>(version, (release = updates))) {
+    console.log(!version);
+    console.log(latestKey !== version);
+    if (
+      !version ||
+      (latestKey !== version && check<UpdatesPropertys>(version, (releaseObject = updates)))
+    ) {
       throw new Error("Invalid version");
     }
 
-    release = release[version];
+    // Detect if client want latest version.
+    if (latestKey === version) {
+      const latestVersionKey: string = Object.keys(updates).slice(-1)[0];
+      version = latestVersionKey;
+    }
+
+    releaseObject = (updates as UpdatesPropertys)[version];
     // Detect the platform by param `plat..`.
-    if (plf && !check<UpdatesPropertys>(plf, release)) {
+    if (plf && !check<UpdatesPropertys>(plf, releaseObject)) {
       // swicth the release to platform object.
-      release = release[plf];
+      releaseObject = releaseObject[plf];
       // Detect arch from query if not exists will return all release automatically.
       let arch: string | undefined;
       if (
         (arch = req.query.arch) &&
         archs.indexOf(arch) !== -1 &&
-        !check<UpdatesPropertys>(arch, release)
+        !check<UpdatesPropertys>(arch, releaseObject)
       ) {
-        release = release[arch];
+        releaseObject = releaseObject[arch];
       }
     }
 
     // setted `any` because the release object is not static.
-    return res.status(200).json(ResponseSt(true, null, Object.assign({}, release, { version })));
+    return res
+      .status(200)
+      .json(ResponseSt(true, null, Object.assign({}, releaseObject, { version })));
   } catch (e) {
     // If error occurred.
     return res.status(400).json(ResponseSt(false, String(e)));
